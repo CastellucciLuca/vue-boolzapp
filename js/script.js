@@ -3,7 +3,7 @@ const {createApp} = Vue;
 createApp({
 	data() {
 		return{
-        	contacts: [
+        contacts: [
     {
         name: 'Michele',
         avatar: '_1',
@@ -166,13 +166,32 @@ createApp({
         ],
     }
 			],
-			contactSelected : 2
+			contactSelected : 0,
+			userMessage : ""
 		}
 	},
     methods: {
 		contactClick(num){
 			this.contactSelected = num;
-			console.log(this.contactSelected);
+			console.log(this.contactSelected)
+		},
+		userSendMes(){
+			newMes = {
+				date : '00:00',
+				message : this.userMessage,
+				status : 'sent'
+			}
+			this.contacts[this.contactSelected].messages.push(newMes);
+			this.userMessage = '';
+			setTimeout ( () => {
+				contactReply = {
+					date : '00:00',
+					message : 'Ok',
+					status : 'received'
+					
+				}
+				this.contacts[this.contactSelected].messages.push(contactReply);
+			} , 1000);
 		}
 	}
 }).mount ('#app')
