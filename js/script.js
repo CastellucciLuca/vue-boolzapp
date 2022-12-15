@@ -167,7 +167,8 @@ createApp({
     }
 			],
 			contactSelected : 0,
-			userMessage : ""
+			userMessage : "",
+			userSearch : ""
 		}
 	},
     methods: {
@@ -176,22 +177,38 @@ createApp({
 			console.log(this.contactSelected)
 		},
 		userSendMes(){
-			newMes = {
-				date : '00:00',
-				message : this.userMessage,
-				status : 'sent'
-			}
-			this.contacts[this.contactSelected].messages.push(newMes);
-			this.userMessage = '';
-			setTimeout ( () => {
-				contactReply = {
+			if (this.userMessage.length > 0){
+				newMes = {
 					date : '00:00',
-					message : 'Ok',
-					status : 'received'
-					
+					message : this.userMessage,
+					status : 'sent'
 				}
-				this.contacts[this.contactSelected].messages.push(contactReply);
-			} , 1000);
-		}
+				
+				this.contacts[this.contactSelected].messages.push(newMes);
+				
+				this.userMessage = '';
+				
+				setTimeout ( () => {
+					contactReply = {
+						date : '00:00',
+						message : 'Ok',
+						status : 'received'
+						
+					}
+					this.contacts[this.contactSelected].messages.push(contactReply);
+				} , 1000);
+			}
+		},
+		userSearchFunction() {
+			this.contacts.forEach( (element, index) => {
+				this.contacts[index].visible = true;
+				if( !this.contacts[index].name.toLowerCase().includes(this.userSearch.toLowerCase())  ){
+					console.log(true);
+					this.contacts[index].visible = false;
+				}
+			});
+			
+		},
+	
 	}
 }).mount ('#app')

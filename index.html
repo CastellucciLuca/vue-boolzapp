@@ -44,21 +44,22 @@
                     <!--SEARCH SECTION -->                
                     <section id="search">
                         <button><i class="fa-solid fa-magnifying-glass"></i></button>
-                        <input type="text" placeholder="Cerca o inizia una nuova chat">
+                        <input type="text" placeholder="Cerca o inizia una nuova chat" v-model="userSearch" @keyup.enter="userSearchFunction()">
                     </section>
                     <!--CONTACTS BOXES SECTION-->
                     <section id="contacts">
-                        <div class="contact d-flex justify-content-between px-3" v-for="(userContact, index) in contacts" @click="contactClick(index)" :class="(index == contactSelected) ? 'contact-selector-active' : 'contact-selector-inactive' ">
-                            <div class="contacts-profile h-100 d-flex align-items-center just">
-                                <img :src=" `./img/avatar${userContact.avatar}.jpg`" alt="" class="h-75 rounded-circle">
+                        <div class="contact justify-content-between px-3" v-for="(userContact, index) in contacts" @click="contactClick(index)" :class="((index == contactSelected) ? 'contact-selector-active' : 'contact-selector-inactive' ), ((contacts[index].visible == false) ? 'd-none' : 'd-flex')" >
+                            <div class="contacts-profile h-100 d-flex align-items-center">
+                                <img :src=" `./img/avatar${userContact.avatar}.jpg`" :alt=" `${userContact.name} avatar` " class="h-75 rounded-circle">
                                 <div class="contacts-text ms-2">
                                     <span class="fs-5"> {{userContact.name}} </span>
                                     <p class="m-0">Ultimo messaggio inviato</p>
                                 </div>
                             </div>
-                            <div class="hours">
+                            <div class="hours" :class="(contacts[index].visible == false) ? 'd-none' : 'd-flex' ">
                                 <span>12:00</span>
-                            </div> 
+                            </div>
+                        </div>
                     </section>
                 </header>
                 <main>
