@@ -46,6 +46,7 @@ section#user-info{
 div.user-icon i{
     color: #b1b1b1;
 }
+/* /NOTIFY SECTION/ */
 section#notify{
     background-color: #8edafc;
     height: 10%;
@@ -61,6 +62,7 @@ div.notify-info a{
     color: gray;
     border-bottom: 1px solid gray;
 }
+/* /SEARCH SECTION/ */
 section#search{
     padding: .5rem;
     background-color: white;
@@ -78,9 +80,17 @@ section#search input{
     color: gray;
     padding: .2rem .5rem;
 }
-/* /-----CONTACTS-----/ */
+/* /-----CONTACTS BOXES SECTION-----/ */
 section#contacts{
+    height: 77%;
+    overflow-y: scroll;
+}
+div.contact{
     width: 100%;
-    height: 10%;
+    height: calc(100% / 6);
     background-color: white;
+}
+div.contacts-profile p{
+    font-size: .8rem;
+    color: grey;
 }
