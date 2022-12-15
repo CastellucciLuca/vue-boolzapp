@@ -62,7 +62,26 @@
                     </section>
                 </header>
                 <main>
-                    
+                    <section id="user-message" class="d-flex align-items-center px-3">
+                        <div class="mex-info-img h-75">
+                            <img :src=" `./img/avatar${contacts[contactSelected].avatar}.jpg` " alt="" class="h-100 rounded-circle">
+                        </div>
+                        <div class="user-message-txt ps-2">
+                            <span class="fs-4">{{ contacts[contactSelected].name }}</span>
+                            <p class="m-0">Ultimo accesso oggi alle 12:00</p>
+                        </div>
+                        <div class="user-message-icon d-flex align-items-center fs-4 ms-auto">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <i class="fa-solid fa-paperclip px-4"></i>
+                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                        </div>
+                    </section>
+                    <section id="message" class="d-flex flex-column">
+                        <div class="message-box mess" :class="(text.status == 'sent') ? 'mess-green' : 'mess-white' " v-for="(text,index) in contacts[contactSelected].messages">
+                            <p class="m-0">{{ text.message }}</p>
+                            <span class="mess-date">{{ contacts[0].messages[0].date }}</span>
+                        </div>
+                    </section>
                 </main>
             </div>
         </div>

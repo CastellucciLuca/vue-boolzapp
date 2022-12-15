@@ -15,6 +15,33 @@ div.wrap-container div.top-bg{
     background-color: #009688;
     height: 20%;
 }
+/* /--------MESSAGE COLORS-------/ */
+.mess{
+    padding: 1.5rem 2rem;
+    border-radius: 1rem;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.mess-green{
+    background-color: #d5f9ba;
+    align-items: flex-end;
+    margin-left: auto;
+}
+
+.mess-white{
+    background-color: white;
+    align-items: flex-end;
+}
+
+.mess-date{
+    font-size: .7rem;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 0 .5rem 0 .2rem;
+    color: gray;
+}
 /* /--------BOX---------/ */
 div.container-box{
     width: 80%;
@@ -93,4 +120,28 @@ div.contact{
 div.contacts-profile p{
     font-size: .8rem;
     color: grey;
+}
+/* /---------------MAIN--------------/ */
+main{
+    background-image: url(../img/mine.jpg);
+}
+
+section#user-message{
+    width: 100%;
+    height: 8%;
+    background-color: #eaeaea;
+    border-left: 2px solid rgb(211, 211, 211);
+}
+
+section#message{
+    width: 100%;
+    height: 92%;
+    border: 2px solid black;
+    padding: 5rem;
+}
+
+div.message-box{
+    width: 35%;
+    position: relative;
+    margin-bottom: 2rem;
 }
