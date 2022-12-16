@@ -168,7 +168,8 @@ createApp({
 			],
 			contactSelected : 0,
 			userMessage : "",
-			userSearch : ""
+            userSearch : "",
+            deleteMexWindows : false 
 		}
 	},
     methods: {
@@ -203,12 +204,20 @@ createApp({
 			this.contacts.forEach( (element, index) => {
 				this.contacts[index].visible = true;
 				if( !this.contacts[index].name.toLowerCase().includes(this.userSearch.toLowerCase())  ){
-					console.log(true);
 					this.contacts[index].visible = false;
 				}
 			});
 			
 		},
-	
+        openDeleteWindow(){
+            this.deleteMexWindows = !this.deleteMexWindows;
+        },
+        deleteMessage(mexToRemove, mexIndex){
+			const toRemoveCheck = this.contacts[this.contactSelected].messages[mexIndex].message.indexOf(mexToRemove);
+			if (toRemoveCheck > - 1 ){
+				this.contacts[this.contactSelected].messages.splice(mexToRemove, 1);
+			}
+            console.log(toRemoveCheck);
+		},
 	}
 }).mount ('#app')

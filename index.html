@@ -48,7 +48,7 @@
                     </section>
                     <!--CONTACTS BOXES SECTION-->
                     <section id="contacts">
-                        <div class="contact justify-content-between px-3" v-for="(userContact, index) in contacts" @click="contactClick(index)" :class="((index == contactSelected) ? 'contact-selector-active' : 'contact-selector-inactive' ), ((contacts[index].visible == false) ? 'd-none' : 'd-flex')" >
+                        <div class="contact justify-content-between px-3" v-for="(userContact, index) in contacts" @click="contactClick(index)" :class="[((index == contactSelected) ? 'contact-selector-active' : 'contact-selector-inactive' ), ((contacts[index].visible == false) ? 'd-none' : 'd-flex')]" >
                             <div class="contacts-profile h-100 d-flex align-items-center">
                                 <img :src=" `./img/avatar${userContact.avatar}.jpg`" :alt=" `${userContact.name} avatar` " class="h-75 rounded-circle">
                                 <div class="contacts-text ms-2">
@@ -80,9 +80,16 @@
                     </section>
                     <!-- MESSAGES -->
                     <section id="message" class="d-flex flex-column">
-                        <div class="message-box mess" :class="(text.status == 'sent') ? 'mess-green' : 'mess-white' " v-for="(text,index) in contacts[contactSelected].messages">
-                            <p class="m-0">{{ text.message }}</p>
-                            <span class="mess-date">{{ contacts[0].messages[0].date }}</span>
+                        <div class="message-box mess position-relative" :class="(text.status == 'sent') ? 'mess-green' : 'mess-white' " v-for="(text,index) in contacts[contactSelected].messages">
+                            <p class="m-0">{{text.message}}</p>
+                            <span class="mess-date">{{ text.date }}</span>
+                    <!-- DELETE MESSAGE -->
+                            <div class="open-delete-window position-absolute top-0 end-0 pe-3 pt-2" @click="openDeleteWindow">
+                                <i class="fa-solid fa-chevron-down"></i>
+                                <div class="delete-window position-absolute" :class="(deleteMexWindows) ? 'd-flex' : 'd-none' " @click="deleteMessage(text.message, index)">
+                                    <span class="m-auto">Delete Message</span>
+                                </div>
+                            </div>
                         </div>
                     </section>
                     <!--ENTER MESSAGES SECTION-->

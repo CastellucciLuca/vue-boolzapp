@@ -158,3 +158,20 @@ section#user-mex{
     height: 8.5%;
     background-color: #f3eeea;
 }
+/* / DELETE MESSAGE / */
+div.open-delete-window{
+    display: block;
+    cursor: pointer;
+}
+div.delete-window{
+    width: 150px;
+    height: 50px;
+    background-color: white;
+    right: 1rem;
+    z-index: 2;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: none;
+}
+div.delete-window:hover{
+    background-color: crimson;
+}
