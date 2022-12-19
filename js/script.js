@@ -3,7 +3,7 @@ const {createApp} = Vue;
 createApp({
 	data() {
 		return{
-        contacts: [
+            contacts: [
     {
         name: 'Michele',
         avatar: '_1',
@@ -168,8 +168,9 @@ createApp({
 			],
 			contactSelected : 0,
 			userMessage : "",
-            userSearch : "",
-            deleteMexWindows : false 
+			userSearch : "",
+            windowOpen : false,
+            messageClicked  : -1
 		}
 	},
     methods: {
@@ -178,9 +179,12 @@ createApp({
 			console.log(this.contactSelected)
 		},
 		userSendMes(){
+            const DateTime = luxon.DateTime;
+            dt = DateTime.now();
+            console.log(dt)
 			if (this.userMessage.length > 0){
 				newMes = {
-					date : '00:00',
+					date : dt.toLocaleString() + " " + dt.toLocaleString(DateTime.TIME_24_WITH_SECONDS),
 					message : this.userMessage,
 					status : 'sent'
 				}
@@ -191,9 +195,9 @@ createApp({
 				
 				setTimeout ( () => {
 					contactReply = {
-						date : '00:00',
+						date : dt.toLocaleString() + " " + dt.toLocaleString(DateTime.TIME_24_WITH_SECONDS),
 						message : 'Ok',
-						status : 'received'
+						status : 'received', 
 						
 					}
 					this.contacts[this.contactSelected].messages.push(contactReply);
@@ -209,15 +213,18 @@ createApp({
 			});
 			
 		},
-        openDeleteWindow(){
-            this.deleteMexWindows = !this.deleteMexWindows;
+        openDeleteWindow(indexClicked){
+            if(this.windowOpen == true){
+                this.messageClicked = -1;
+                this.windowOpen = false
+            } else {
+                this.messageClicked = indexClicked;
+                this.windowOpen = true
+            }
         },
-        deleteMessage(mexToRemove, mexIndex){
-			const toRemoveCheck = this.contacts[this.contactSelected].messages[mexIndex].message.indexOf(mexToRemove);
-			if (toRemoveCheck > - 1 ){
-				this.contacts[this.contactSelected].messages.splice(mexToRemove, 1);
-			}
-            console.log(toRemoveCheck);
-		},
+        deleteMessage(mexIndex){
+            this.contacts[this.contactSelected].messages.splice(mexIndex, 1);
+            console.log(mexIndex);
+		},	
 	}
 }).mount ('#app')

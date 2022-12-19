@@ -52,8 +52,8 @@
                             <div class="contacts-profile h-100 d-flex align-items-center">
                                 <img :src=" `./img/avatar${userContact.avatar}.jpg`" :alt=" `${userContact.name} avatar` " class="h-75 rounded-circle">
                                 <div class="contacts-text ms-2">
-                                    <span class="fs-5"> {{userContact.name}} </span>
-                                    <p class="m-0">Ultimo messaggio inviato</p>
+                                    <span class="fs-5">{{userContact.name}}</span>
+                                    <p class="m-0">{{userContact.messages.slice(-1)[0].message}}</p>
                                 </div>
                             </div>
                             <div class="hours" :class="(contacts[index].visible == false) ? 'd-none' : 'd-flex' ">
@@ -69,7 +69,7 @@
                             <img :src=" `./img/avatar${contacts[contactSelected].avatar}.jpg` " alt="" class="h-100 rounded-circle">
                         </div>
                         <div class="user-message-txt ps-2">
-                            <span class="fs-4">{{ contacts[contactSelected].name }}</span>
+                            <span class="fs-4">{{contacts[contactSelected].name}}</span>
                             <p class="m-0">Ultimo accesso oggi alle 12:00</p>
                         </div>
                         <div class="user-message-icon d-flex align-items-center fs-4 ms-auto">
@@ -82,14 +82,14 @@
                     <section id="message" class="d-flex flex-column">
                         <div class="message-box mess position-relative" :class="(text.status == 'sent') ? 'mess-green' : 'mess-white' " v-for="(text,index) in contacts[contactSelected].messages">
                             <p class="m-0">{{text.message}}</p>
-                            <span class="mess-date">{{ text.date }}</span>
+                            <span class="mess-date">{{text.date.split(" ")[1].slice(0, -3)}}</span>
                     <!-- DELETE MESSAGE -->
-                            <div class="open-delete-window position-absolute top-0 end-0 pe-3 pt-2" @click="openDeleteWindow">
-                                <i class="fa-solid fa-chevron-down"></i>
-                                <div class="delete-window position-absolute" :class="(deleteMexWindows) ? 'd-flex' : 'd-none' " @click="deleteMessage(text.message, index)">
-                                    <span class="m-auto">Delete Message</span>
-                                </div>
+                        <div class="open-delete-window position-absolute top-0 end-0 pe-3 pt-2" @click="openDeleteWindow(index)">
+                            <i class="fa-solid fa-chevron-down"></i>
+                            <div class="delete-window position-absolute" :class="(messageClicked == index) ? 'd-flex' : 'd-none' " @click="deleteMessage(index)">
+                                <span class="m-auto">Delete Message</span>
                             </div>
+                        </div>
                         </div>
                     </section>
                     <!--ENTER MESSAGES SECTION-->
@@ -102,8 +102,9 @@
             </div>
         </div>
     </div>
-    <!--VUE 3/JS LINKS-->
+    <!--VUE 3/JS LINKS /LUXON FOR DATE-->
     <script src='https://unpkg.com/vue@3/dist/vue.global.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.1.1/build/global/luxon.min.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>
